@@ -12,12 +12,12 @@ import (
 )
 
 func (self *Announce) ProcessAnnounce(remoteAddr, infoHash, peerID, port, uploaded, downloaded, left, ip, numwant,
-	event string) *tracker.Response {
+	event string) *Response.Response {
 		if request, err := tracker.MakeRequest(remoteAddr, infoHash, peerID, port, uploaded, downloaded, left, ip, numwant,
 			event, self.Logger); err==nil {
 			if self.Logger != nil {	self.Logger.Println(request.String()) }
 
-			response := tracker.Response{
+			response := Response.Response{
 				Interval: 30,
 			}
 
@@ -25,10 +25,7 @@ func (self *Announce) ProcessAnnounce(remoteAddr, infoHash, peerID, port, upload
 				self.Storage.Update(*request)
 				response.Peers = self.Storage.GetPeers(request.InfoHash)
 				response.Peers = append(response.Peers, self.makeForwards(*request)...)
-			} else {
-				self.Storage.Delete(*request)
-				//TODO: make another response ?
-			}
+			} else { self.Storage.Delete(*request) }
 
 			return &response
 		} else {

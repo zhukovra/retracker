@@ -11,7 +11,7 @@ func (self *Announce) HttpHandler(w http.ResponseWriter, r *http.Request) {
 	if self.Logger != nil {
 		self.Logger.Printf("%s %s %s %s\n", r.RemoteAddr, xrealip, r.RequestURI, r.UserAgent())
 	}
-	rr := self.ProcessAnnounce(
+	response := self.ProcessAnnounce(
 		self.getRemoteAddr(r, xrealip),
 		r.URL.Query().Get(`info_hash`),
 		r.URL.Query().Get(`peer_id`),
@@ -23,7 +23,9 @@ func (self *Announce) HttpHandler(w http.ResponseWriter, r *http.Request) {
 		r.URL.Query().Get(`numwant`),
 		r.URL.Query().Get(`event`),
 		)
-	if d, err := rr.Bencode(); err==nil {
+	compacted := false
+	if r.URL.Query().Get(`compact`) == `1` { compacted = true }
+	if d, err := response.Bencode(compacted); err==nil {
 		fmt.Fprint(w, d)
 		if self.Logger != nil && self.Config.Debug {
 			self.Logger.Printf("Bencode: %s\n", d)
