@@ -20,7 +20,9 @@ func (self *Response) Bencode(compacted bool) (string, error) {
 }
 
 func (self *Response) Compacted() ResponseCompacted {
-	response := ResponseCompacted{ Interval: self.Interval }
+	response := ResponseCompacted{
+		Interval: self.Interval,
+	}
 	response.ReloadPeers(self.Peers)
 	return response
 }

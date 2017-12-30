@@ -26,6 +26,7 @@ func main() {
 	debug := flag.Bool("d", false, "Debug mode")
 	xrealip := flag.Bool("x", false, "Get RemoteAddr from X-Real-IP header")
 	forwards := flag.String("f", "", "Load forwards from YAML file")
+	forwardTimeout := flag.Int("t", 2, "Timeout (sec) for forward requests (used with -f)")
 	ver := flag.Bool("v", false, "Show version")
 	flag.Parse()
 
@@ -40,6 +41,7 @@ func main() {
 		Debug: *debug,
 		Age: *age,
 		XRealIP: *xrealip,
+		ForwardTimeout: *forwardTimeout,
 	}
 
 	if *forwards != `` {

@@ -11,6 +11,7 @@ type Config struct {
 	Age float64
 	XRealIP bool
 	Forwards []Forward
+	ForwardTimeout int
 }
 
 func (self *Config) ReloadForwards(fileName string) error {
