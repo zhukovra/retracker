@@ -26,6 +26,10 @@ Add retracker.local to your local DNS or /etc/hosts.
 
 Add http://retracker.local/announce to your torrent.
 
+### Docker
+
+Build image with application: `docker build -t zhukovra/retracker .`
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
