@@ -1,9 +1,9 @@
 package receiver
 
 import (
-	Announce "github.com/vvampirius/retracker/core/receiver/announce"
-	Storage "github.com/vvampirius/retracker/core/storage"
-	CoreCommon "github.com/vvampirius/retracker/core/common"
+	CoreCommon "github.com/zhukovra/retracker/core/common"
+	Announce "github.com/zhukovra/retracker/core/receiver/announce"
+	Storage "github.com/zhukovra/retracker/core/storage"
 )
 
 type Receiver struct {

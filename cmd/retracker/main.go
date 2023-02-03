@@ -1,18 +1,18 @@
 package main
 
 import (
-	Core "github.com/vvampirius/retracker/core"
-	"github.com/vvampirius/retracker/core/common"
 	"flag"
 	"fmt"
-	"syscall"
+	Core "github.com/zhukovra/retracker/core"
+	"github.com/zhukovra/retracker/core/common"
 	"os"
+	"syscall"
 )
 
-const VERSION  = 0.2
+const VERSION = 0.2
 
-func PrintRepo(){
-	fmt.Fprintln(os.Stderr, "\n# https://github.com/vvampirius/retracker")
+func PrintRepo() {
+	fmt.Fprintln(os.Stderr, "\n# https://github.com/zhukovra/retracker")
 }
 
 func main() {
@@ -21,7 +21,7 @@ func main() {
 		flag.PrintDefaults()
 		PrintRepo()
 	}
-	listen := flag.String("l", ":80", "Listen address:port")
+	listen := flag.String("l", ":8080", "Listen address:port")
 	age := flag.Float64("a", 180, "Keep 'n' minutes peer in memory")
 	debug := flag.Bool("d", false, "Debug mode")
 	xrealip := flag.Bool("x", false, "Get RemoteAddr from X-Real-IP header")
@@ -35,9 +35,9 @@ func main() {
 	}
 
 	config := common.Config{
-		Listen: *listen,
-		Debug: *debug,
-		Age: *age,
+		Listen:  *listen,
+		Debug:   *debug,
+		Age:     *age,
 		XRealIP: *xrealip,
 	}
 
